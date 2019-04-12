@@ -13,6 +13,7 @@
 		583F7E3F2260901A00231E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 583F7E3D2260901A00231E52 /* Main.storyboard */; };
 		583F7E482260907100231E52 /* ScreenshotMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F7E472260907100231E52 /* ScreenshotMaker.swift */; };
 		58C4C18C2260AE28007F6494 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C4C18B2260AE28007F6494 /* Config.swift */; };
+		58C4C18E2260C0D6007F6494 /* SAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C4C18D2260C0D6007F6494 /* SAError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		583F7E412260901A00231E52 /* Shooter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shooter.entitlements; sourceTree = "<group>"; };
 		583F7E472260907100231E52 /* ScreenshotMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotMaker.swift; sourceTree = "<group>"; };
 		58C4C18B2260AE28007F6494 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		58C4C18D2260C0D6007F6494 /* SAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				583F7E372260901900231E52 /* AppDelegate.swift */,
 				583F7E392260901900231E52 /* ViewController.swift */,
 				583F7E472260907100231E52 /* ScreenshotMaker.swift */,
+				58C4C18D2260C0D6007F6494 /* SAError.swift */,
 				583F7E3B2260901A00231E52 /* Assets.xcassets */,
 				583F7E3D2260901A00231E52 /* Main.storyboard */,
 				583F7E402260901A00231E52 /* Info.plist */,
@@ -101,6 +104,11 @@
 				TargetAttributes = {
 					583F7E332260901900231E52 = {
 						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -141,6 +149,7 @@
 			files = (
 				583F7E3A2260901900231E52 /* ViewController.swift in Sources */,
 				58C4C18C2260AE28007F6494 /* Config.swift in Sources */,
+				58C4C18E2260C0D6007F6494 /* SAError.swift in Sources */,
 				583F7E482260907100231E52 /* ScreenshotMaker.swift in Sources */,
 				583F7E382260901900231E52 /* AppDelegate.swift in Sources */,
 			);
@@ -280,6 +289,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shooter/Shooter.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = GHZCTHXK8S;
@@ -288,8 +298,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = shooter.drygan.dev.Shooter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -299,6 +311,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Shooter/Shooter.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = GHZCTHXK8S;
@@ -307,8 +320,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = shooter.drygan.dev.Shooter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

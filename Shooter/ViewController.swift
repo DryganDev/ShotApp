@@ -8,8 +8,11 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+final class ViewController: NSViewController {
 
+    @IBOutlet weak var imageView: NSImageView!
+    private let screenshotMaker = ScreenshotMaker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,5 +26,19 @@ class ViewController: NSViewController {
     }
 
 
+    @IBAction func buttonTapped(_ sender: NSButton) {
+        print(type(of: sender))
+        do {
+            let destinationImage = try screenshotMaker.doScreenshot()
+            if (FileManager.default.fileExists(atPath: destinationImage.path)) {
+                let img: NSImage = NSImage(byReferencingFile: destinationImage.path)!
+                imageView.image = img
+//                try FileManager.default.moveItem(at: destinationImage, to: Config.shared.imageDestination.appendingPathComponent("ololo - 123"))
+            }
+            #warning("think about clipboard")
+        } catch {
+            print(error)
+        }
+    }
 }
 

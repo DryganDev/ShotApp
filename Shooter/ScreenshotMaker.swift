@@ -12,18 +12,32 @@ import Carbon
 
 class ScreenshotMaker {
     
+    private var timeStamp: String {
+        return timeFormatter.string(from: Date())
+    }
     
+    lazy var timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy HH:mm:ss"
+        return formatter
+    }()
     
-    func doScreenshot() throws {
-        let task = Process()
-        task.launchPath = "/usr/sbin/screencaptur"
+    func doScreenshot() throws -> URL {
+        print(Config.shared.imageDestination)
         print(Config.shared.imageDestination.path)
-        print(Config.shared.imageDestination.absoluteString)
-        task.arguments = ["-i", "-r", Config.shared.imageDestination.path]
-        task.qualityOfService = .userInteractive
+        
+        let task = Process()
+        task.launchPath = "/usr/sbin/screencapture"
+        let destination = Config.shared.imageDestination.path + " " + timeStamp
+//        appendingPathComponent("Screenshot " + timeStamp).path
+//            .path + " " + timeStamp
+        print(destination)
+        task.arguments = ["-i", "-r", destination]
+//
         try task.run()
         task.waitUntilExit()
-        
+        let url = URL(fileURLWithPath: destination)
+        return url
     }
     
 }
