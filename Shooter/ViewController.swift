@@ -35,37 +35,27 @@ final class ViewController: NSViewController {
                 let img: NSImage = NSImage(byReferencingFile: destinationImage.path)!
                 imageView.image = img
 //                try FileManager.default.moveItem(at: destinationImage, to: Config.shared.imageDestination.appendingPathComponent("ololo - 123"))
-//                Alamofire.upload(
-//                    multipartFormData: { multipartFormData in
-//                        multipartFormData.append(unicornImageURL, withName: "unicorn")
-//                        multipartFormData.append(rainbowImageURL, withName: "rainbow")
-//                },
-//                    to: "https://httpbin.org/post",
-//                    encodingCompletion: { encodingResult in
-//                        switch encodingResult {
-//                        case .success(let upload, _, _):
-//                            upload.responseJSON { response in
-//                                debugPrint(response)
-//                            }
-//                        case .failure(let encodingError):
-//                            print(encodingError)
-//                        }
+//                if let bits = img?.representations.first as? NSBitmapImageRep {
+//                    let data = bits.representationUsingType(.NSJPEGFileType, properties: [:])
+//                    data?.writeToFile("/path/myImage.jpg", atomically: false)
 //                }
-//                )
-                
-                AF.upload(multipartFormData: { multipartData in
-                    multipartData.append(Data(contentsOf: destinationImage), withName: "")
-                }, to: "",
-                   encodingCompletion: { encodingResult in
-                    switch encodingResult {
+                guard let bits = img.representations.first as? NSBitmapImageRep else { return }
+                guard let imageData = bits.representation(using: NSBitmapImageRep.FileType.jpeg, properties: [NSBitmapImageRep.PropertyKey.compressionFactor: 0.9]) else { return }
+                Alamofire.upload(multipartFormData: { multipartData in
+                    multipartData.append(imageData, withName: "content", fileName: "file", mimeType: "image")
+                }, to: "http://localhost:8080/upload",
+                   method: HTTPMethod.post,
+                   headers: ["Content-Type" : "multipart/form-data"]) { result in
+                    switch result {
                     case .success(let upload, _, _):
+                        print(upload)
                         upload.responseJSON { response in
                             debugPrint(response)
                         }
                     case .failure(let encodingError):
                         print(encodingError)
                     }
-                })
+                }
             }
             #warning("think about clipboard")
         } catch {
