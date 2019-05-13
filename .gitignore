@@ -2,3 +2,8 @@
 Shooter\.xcodeproj/xcuserdata/
 
 Shooter\.xcodeproj/project\.xcworkspace/
+
+
+# Accio dependency management
+Dependencies/
+.accio/

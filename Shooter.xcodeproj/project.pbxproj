@@ -14,6 +14,7 @@
 		583F7E482260907100231E52 /* ScreenshotMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583F7E472260907100231E52 /* ScreenshotMaker.swift */; };
 		58C4C18C2260AE28007F6494 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C4C18B2260AE28007F6494 /* Config.swift */; };
 		58C4C18E2260C0D6007F6494 /* SAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C4C18D2260C0D6007F6494 /* SAError.swift */; };
+		E260A2B0FC9A02AEEE1DD864A5272037 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE988D975399F48334CEB90B582DDA08 /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		583F7E472260907100231E52 /* ScreenshotMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotMaker.swift; sourceTree = "<group>"; };
 		58C4C18B2260AE28007F6494 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		58C4C18D2260C0D6007F6494 /* SAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAError.swift; sourceTree = "<group>"; };
+		FE988D975399F48334CEB90B582DDA08 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Dependencies/macOS/Alamofire.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,17 +36,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E260A2B0FC9A02AEEE1DD864A5272037 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		369F9CD684C25EB7385FFD1DAF13986C /* Shooter */ = {
+			isa = PBXGroup;
+			children = (
+				FE988D975399F48334CEB90B582DDA08 /* Alamofire.framework */,
+			);
+			name = Shooter;
+			sourceTree = "<group>";
+		};
 		583F7E2B2260901900231E52 = {
 			isa = PBXGroup;
 			children = (
 				583F7E362260901900231E52 /* Shooter */,
 				583F7E352260901900231E52 /* Products */,
+				E9013917BABDDF27C66B676735997F7B /* Dependencies */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +84,14 @@
 			path = Shooter;
 			sourceTree = "<group>";
 		};
+		E9013917BABDDF27C66B676735997F7B /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				369F9CD684C25EB7385FFD1DAF13986C /* Shooter */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,6 +102,7 @@
 				583F7E302260901900231E52 /* Sources */,
 				583F7E312260901900231E52 /* Frameworks */,
 				583F7E322260901900231E52 /* Resources */,
+				311C48CDF17A22B2C7F0B846EA5D02C0 /* Accio */,
 			);
 			buildRules = (
 			);
@@ -141,6 +162,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		311C48CDF17A22B2C7F0B846EA5D02C0 /* Accio */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Dependencies/macOS/Alamofire.framework",
+			);
+			name = Accio;
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		583F7E302260901900231E52 /* Sources */ = {
@@ -293,6 +333,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = GHZCTHXK8S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/macOS",
+				);
 				INFOPLIST_FILE = Shooter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -315,6 +359,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = GHZCTHXK8S;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dependencies/macOS",
+				);
 				INFOPLIST_FILE = Shooter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
