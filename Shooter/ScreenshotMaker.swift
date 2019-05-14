@@ -23,15 +23,15 @@ class ScreenshotMaker {
     }()
     
     func doScreenshot() throws -> URL {
-        print(Config.shared.imageDestination)
-        print(Config.shared.imageDestination.path)
+//        print(Config.shared.imageDestination)
+//        print(Config.shared.imageDestination.path)
         
         let task = Process()
         task.launchPath = "/usr/sbin/screencapture"
         let destination = Config.shared.imageDestination.path + " " + timeStamp
 //        appendingPathComponent("Screenshot " + timeStamp).path
 //            .path + " " + timeStamp
-        print(destination)
+//        print(destination)
         task.arguments = ["-i", "-r", destination]
 //
         try task.run()

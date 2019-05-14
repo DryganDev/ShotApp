@@ -34,11 +34,6 @@ final class ViewController: NSViewController {
             if (FileManager.default.fileExists(atPath: destinationImage.path)) {
                 let img: NSImage = NSImage(byReferencingFile: destinationImage.path)!
                 imageView.image = img
-//                try FileManager.default.moveItem(at: destinationImage, to: Config.shared.imageDestination.appendingPathComponent("ololo - 123"))
-//                if let bits = img?.representations.first as? NSBitmapImageRep {
-//                    let data = bits.representationUsingType(.NSJPEGFileType, properties: [:])
-//                    data?.writeToFile("/path/myImage.jpg", atomically: false)
-//                }
                 guard let bits = img.representations.first as? NSBitmapImageRep else { return }
                 guard let imageData = bits.representation(using: NSBitmapImageRep.FileType.jpeg, properties: [NSBitmapImageRep.PropertyKey.compressionFactor: 0.9]) else { return }
                 Alamofire.upload(multipartFormData: { multipartData in
