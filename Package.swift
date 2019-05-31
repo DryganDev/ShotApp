@@ -7,6 +7,7 @@ let package = Package(
     dependencies: [
         // add your dependencies here, for example:
         // .package(url: "https://github.com/User/Project.git", .upToNextMajor(from: "1.0.0")),
+//        .package(url: "https://github.com/MihaelIsaev/CodyFire.git", .upToNextMajor(from: "1.0.0"))
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "4.1.0"))
     ],
     targets: [
