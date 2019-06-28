@@ -7,3 +7,5 @@ Shooter\.xcodeproj/project\.xcworkspace/
 # Accio dependency management
 Dependencies/
 .accio/
+
+Carthage/
