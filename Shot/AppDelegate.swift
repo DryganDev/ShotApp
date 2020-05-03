@@ -9,26 +9,53 @@
 import Cocoa
 import SwiftUI
 
+let statusItemController = StatusItemController()
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
-
+//    @IBOutlet var menu: NSMenu!
+    
+    
+    weak var statusItem = statusItemController.statusItem
+//        NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView().environment(\.managedObjectContext, persistentContainer.viewContext)
-
+//        contentView.image = ScreenshotMaker().doScreenshot()!
         // Create the window and set the content view. 
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+            styleMask: [.titled, .closable, .miniaturizable, .resizable],
             backing: .buffered, defer: false)
         window.center()
         window.setFrameAutosaveName("Main Window")
-        window.contentView = NSHostingView(rootView: contentView)
+//        window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
+        
+        if let button = statusItem?.button {
+            print(statusItemController.systemStatusBar.isVertical)
+            print(statusItemController.systemStatusBar.thickness)
+            print(statusItemController.menu)
+            statusItem?.menu = statusItemController.menu
+            print(statusItem?.menu)
+            print(statusItem?.length)
+            
+//            statusItem?.behavior = .removalAllowed
+            button.image = NSImage(named:NSImage.Name("screenshot"))
+//            button.action = #selector(printQuote(_:))
+            print(button.action)
+        }
+    }
+    
+    @objc func printQuote(_ sender: Any?) {
+        let quoteText = "Never put off until tomorrow what you can do the day after tomorrow."
+        let quoteAuthor = "Mark Twain"
+
+        print("\(quoteText) — \(quoteAuthor)")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -133,4 +160,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
 }
-
