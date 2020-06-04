@@ -8,18 +8,16 @@
 
 import Cocoa
 import SwiftUI
-
-let statusItemController = StatusItemController()
+import HotKey
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
-//    @IBOutlet var menu: NSMenu!
+    @IBOutlet var statusItemController: StatusItemController!
     
-    
-    weak var statusItem = statusItemController.statusItem
-//        NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    lazy var statusItem = statusItemController.statusItem
+//    let hotKet = HotKey()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
@@ -27,27 +25,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let contentView = ContentView().environment(\.managedObjectContext, persistentContainer.viewContext)
 //        contentView.image = ScreenshotMaker().doScreenshot()!
         // Create the window and set the content view. 
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable],
-            backing: .buffered, defer: false)
-        window.center()
-        window.setFrameAutosaveName("Main Window")
+//        window = NSWindow(
+//            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
+//            styleMask: [.titled, .closable, .miniaturizable, .resizable],
+//            backing: .buffered, defer: false)
+//        window.center()
+//        window.setFrameAutosaveName("Main Window")
 //        window.contentView = NSHostingView(rootView: contentView)
-        window.makeKeyAndOrderFront(nil)
-        
-        if let button = statusItem?.button {
-            print(statusItemController.systemStatusBar.isVertical)
-            print(statusItemController.systemStatusBar.thickness)
-            print(statusItemController.menu)
-            statusItem?.menu = statusItemController.menu
-            print(statusItem?.menu)
-            print(statusItem?.length)
-            
-//            statusItem?.behavior = .removalAllowed
+//        window.makeKeyAndOrderFront(nil)
+//        NSEvent
+        if let button = statusItem.button {
+            statusItem.menu = statusItemController.menu
+            let view = NSHostingView(rootView: contentView)
+            view.frame = NSRect(origin: .zero, size: CGSize(width: 80, height: 80))
+            statusItemController.firstMenuItem.view = view
             button.image = NSImage(named:NSImage.Name("screenshot"))
-//            button.action = #selector(printQuote(_:))
-            print(button.action)
         }
     }
     
@@ -57,6 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         print("\(quoteText) — \(quoteAuthor)")
     }
+    
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
@@ -159,4 +152,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateNow
     }
 
+}
+
+struct AppDelegate_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
 }

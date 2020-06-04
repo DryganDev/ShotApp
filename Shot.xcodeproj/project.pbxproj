@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58368F09245F7C9F006729E8 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 58368F08245F7C9F006729E8 /* HotKey */; };
 		5851D39723D5C27A0032DE90 /* ScreenShotMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5851D39623D5C27A0032DE90 /* ScreenShotMaker.swift */; };
 		5851D39B23D5D29D0032DE90 /* TextImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5851D39A23D5D29D0032DE90 /* TextImage.swift */; };
 		588D8D54245E351D00832FAE /* StatusItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588D8D53245E351D00832FAE /* StatusItemController.swift */; };
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58368F09245F7C9F006729E8 /* HotKey in Frameworks */,
 				58C0244A23B34F640027654A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +135,7 @@
 			name = Shot;
 			packageProductDependencies = (
 				58C0244923B34F640027654A /* Alamofire */,
+				58368F08245F7C9F006729E8 /* HotKey */,
 			);
 			productName = Shot;
 			productReference = 58C0242F23A97EE00027654A /* Shot.app */;
@@ -164,6 +167,7 @@
 			mainGroup = 58C0242623A97EE00027654A;
 			packageReferences = (
 				58C0244823B34F640027654A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				58368F07245F7C9F006729E8 /* XCRemoteSwiftPackageReference "HotKey" */,
 			);
 			productRefGroup = 58C0243023A97EE00027654A /* Products */;
 			projectDirPath = "";
@@ -401,6 +405,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		58368F07245F7C9F006729E8 /* XCRemoteSwiftPackageReference "HotKey" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soffes/HotKey";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 		58C0244823B34F640027654A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -412,6 +424,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		58368F08245F7C9F006729E8 /* HotKey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 58368F07245F7C9F006729E8 /* XCRemoteSwiftPackageReference "HotKey" */;
+			productName = HotKey;
+		};
 		58C0244923B34F640027654A /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 58C0244823B34F640027654A /* XCRemoteSwiftPackageReference "Alamofire" */;

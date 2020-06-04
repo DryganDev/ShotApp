@@ -673,30 +673,35 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Shot" customModuleProvider="target"/>
-                <menu id="2rG-LK-ycI">
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Shot" customModuleProvider="target">
+                    <connections>
+                        <outlet property="statusItemController" destination="lwn-LS-i3z" id="vdM-B2-wqc"/>
+                    </connections>
+                </customObject>
+                <menu title="Some" id="2rG-LK-ycI">
                     <items>
-                        <menuItem title="Item 1" id="Men-lQ-Y24">
+                        <menuItem title="first" id="Men-lQ-Y24">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem title="Item 2" id="pPw-La-LHY">
+                        <menuItem isSeparatorItem="YES" id="yuG-Xy-GMy"/>
+                        <menuItem title="2" id="pPw-La-LHY">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
-                        <menuItem title="Item 3" id="zBd-FR-k8R">
+                        <menuItem title="3" id="zBd-FR-k8R">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
                     <connections>
-                        <outlet property="delegate" destination="lwn-LS-i3z" id="I9d-1j-CWM"/>
+                        <outlet property="delegate" destination="lwn-LS-i3z" id="ox4-dl-RDM"/>
                     </connections>
                 </menu>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="lwn-LS-i3z" customClass="StatusItemController" customModule="Shot" customModuleProvider="target">
                     <connections>
-                        <outlet property="menu" destination="2rG-LK-ycI" id="XFa-rF-zq5"/>
+                        <outlet property="firstMenuItem" destination="Men-lQ-Y24" id="6I8-nc-FtL"/>
+                        <outlet property="menu" destination="2rG-LK-ycI" id="5gJ-ti-f5q"/>
                     </connections>
                 </customObject>
-                <objectController id="hSB-5p-qTI"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>

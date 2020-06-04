@@ -8,14 +8,19 @@
 
 import SwiftUI
 
+private var rect = NSRect(origin: .zero, size: CGSize(width: 40, height: 40)) {
+    didSet {
+        print(rect)
+    }
+}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) var context
     
-    
-    @State var image: CGImage?
+    @State var image: CGImage? = NSImage(color: NSColor.white, size: NSSize(width: 40, height: 40)).cgImage(forProposedRect: &rect, context: nil, hints: nil)
     var body: some View {
         TextImage(image: image)
-            .frame(minWidth: 500, idealWidth: 600, maxWidth: 700, minHeight: 500, idealHeight: 600, maxHeight: 700, alignment: .center)
+            .frame(minWidth: 10, idealWidth: 60, maxWidth: 700, minHeight: 10, idealHeight: 60, maxHeight: 700, alignment: .center)
 //        VStack{
 //            Image(decorative: image, scale: 1)
 //            Button(action: {

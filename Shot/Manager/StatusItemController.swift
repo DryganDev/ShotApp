@@ -9,11 +9,14 @@
 import AppKit
 
 final class StatusItemController: NSObject {
-    
+        
     @IBOutlet var menu: NSMenu!
+    @IBOutlet var firstMenuItem: NSMenuItem!
     
     let systemStatusBar = NSStatusBar.system
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    
+    
     
 }
 
