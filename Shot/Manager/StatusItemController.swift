@@ -12,18 +12,24 @@ final class StatusItemController: NSObject {
         
     @IBOutlet var menu: NSMenu!
     @IBOutlet var firstMenuItem: NSMenuItem!
+    @IBOutlet var quitMenuItem: NSMenuItem!
     
     let systemStatusBar = NSStatusBar.system
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
-    
+    @IBAction func firstMenuItemTapped(_ sender: NSMenuItem) {
+        
+    }
+    //    @IBAction func firstMenuItemTapped() {
+//
+//    }
     
 }
 
 extension StatusItemController: NSMenuDelegate {
     
     func menuNeedsUpdate(_ menu: NSMenu) {
-        
+
     }
     
     func menu(_ menu: NSMenu, update item: NSMenuItem, at index: Int, shouldCancel: Bool) -> Bool {

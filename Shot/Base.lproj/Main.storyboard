@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -682,6 +683,9 @@
                     <items>
                         <menuItem title="first" id="Men-lQ-Y24">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="firstMenuItemTapped:" target="lwn-LS-i3z" id="GwQ-JS-YYS"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="yuG-Xy-GMy"/>
                         <menuItem title="2" id="pPw-La-LHY">
@@ -689,6 +693,13 @@
                         </menuItem>
                         <menuItem title="3" id="zBd-FR-k8R">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="F8j-9q-4yy"/>
+                        <menuItem title="Quit" id="iLU-gk-7Ja">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="terminate:" target="Ady-hI-5gd" id="GeJ-O0-riq"/>
+                            </connections>
                         </menuItem>
                     </items>
                     <connections>
@@ -700,11 +711,46 @@
                     <connections>
                         <outlet property="firstMenuItem" destination="Men-lQ-Y24" id="6I8-nc-FtL"/>
                         <outlet property="menu" destination="2rG-LK-ycI" id="5gJ-ti-f5q"/>
+                        <outlet property="quitMenuItem" destination="iLU-gk-7Ja" id="31u-2L-OAA"/>
                     </connections>
                 </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="cDW-2p-7Qo">
+            <objects>
+                <windowController storyboardIdentifier="WindowController" id="i0R-uc-Uc7" customClass="WindowController" customModule="Shot" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="i7T-RM-ezK">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="425" y="461" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+                        <connections>
+                            <outlet property="delegate" destination="i0R-uc-Uc7" id="Vkj-iB-4Ka"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="hHo-aq-9tD" kind="relationship" relationship="window.shadowedContentViewController" id="PHW-L4-epS"/>
+                    </connections>
+                </windowController>
+                <customObject id="RsU-MF-FDj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-152" y="436"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2Pw-9Y-eS2">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" id="hHo-aq-9tD" customClass="ViewController" customModule="Shot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Xg6-kk-Y8V">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="dDS-TG-p5z" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="447" y="436"/>
         </scene>
     </scenes>
 </document>

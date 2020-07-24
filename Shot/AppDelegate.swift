@@ -9,22 +9,35 @@
 import Cocoa
 import SwiftUI
 import HotKey
+import Combine
+
+let keyCombo = KeyCombo(key: .four, modifiers: [.command, .shift])
+
+let networkManager = NetworkManager()
+let routerStatusBar = RouterStatusBar()
+let routerWindows = RouterWindows() 
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    var window: NSWindow!
+   
     @IBOutlet var statusItemController: StatusItemController!
     
     lazy var statusItem = statusItemController.statusItem
-//    let hotKet = HotKey()
 
+    var currentViewModel = ViewModel(networkManager: networkManager)
+    
+    var menuCancelable: Cancellable?
+    
+    let hotKey = HotKey(keyCombo: keyCombo)
+        
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let contentView = ContentView().environment(\.managedObjectContext, persistentContainer.viewContext)
-//        contentView.image = ScreenshotMaker().doScreenshot()!
-        // Create the window and set the content view. 
+        let contentView = StatusImageView(viewModel: currentViewModel).environment(\.managedObjectContext, persistentContainer.viewContext)
+        // Create the window and set the content view.
+        let hostingView = NSHostingView(rootView: contentView)
+//        routerWindows.showWindow(hostingView)
 //        window = NSWindow(
 //            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
 //            styleMask: [.titled, .closable, .miniaturizable, .resizable],
@@ -34,22 +47,40 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        window.contentView = NSHostingView(rootView: contentView)
 //        window.makeKeyAndOrderFront(nil)
 //        NSEvent
+        
+//        UIKeyCommand
+//        NSEvent.addGlobalMonitorForEvents(matching: [.flagsChanged]) { (event) in
+//            print("global")
+//            print(event)
+//        }
+//        NSEvent.addLocalMonitorForEvents(matching: [.systemDefined]) { (event) -> NSEvent? in
+//            print("local")
+//            print(event)
+//            return event
+//        }
+        hotKey.keyDownHandler = { [unowned self] in
+            self.currentViewModel.makeScreenshot()
+            routerWindows.showWindow(hostingView)
+        }
+        
         if let button = statusItem.button {
             statusItem.menu = statusItemController.menu
             let view = NSHostingView(rootView: contentView)
-            view.frame = NSRect(origin: .zero, size: CGSize(width: 80, height: 80))
+            view.frame = NSRect(origin: .zero, size: CGSize(width: 200, height: 200))
             statusItemController.firstMenuItem.view = view
             button.image = NSImage(named:NSImage.Name("screenshot"))
+            menuCancelable = currentViewModel.$image
+                .print()
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { (some) in
+                    print(some)
+                }, receiveValue: { [unowned self] image in
+                    guard let size = image?.size else { return }
+                    view.frame = NSRect(origin: CGPoint(x: 100, y: 0), size: CGSize(width: 400, height: 400))
+                    view.needsDisplay = true
+                })
         }
     }
-    
-    @objc func printQuote(_ sender: Any?) {
-        let quoteText = "Never put off until tomorrow what you can do the day after tomorrow."
-        let quoteAuthor = "Mark Twain"
-
-        print("\(quoteText) — \(quoteAuthor)")
-    }
-    
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
@@ -152,10 +183,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateNow
     }
 
-}
-
-struct AppDelegate_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-    }
 }

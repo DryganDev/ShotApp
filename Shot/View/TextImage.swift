@@ -1,17 +1,19 @@
 import SwiftUI
 
 struct TextImage: View {
-    @State var image: CGImage?
+    @EnvironmentObject var viewModel: ViewModel
+//    @ObservedObject var image: NSImage
     
     var body: some View {
         VStack {
-            if image != nil {
-                Image(decorative: image!, scale: 1)
+            if viewModel.image != nil {
+                Image(nsImage: viewModel.image!)
                     .resizable()
-                    .withoutScratch(image!)
+//                    .withoutScratch(image)
             }
             Button(action: {
                 print("Pressed")
+                self.viewModel.makeScreenshot()
             }, label: {
                 Text("hi")
             })
@@ -20,9 +22,18 @@ struct TextImage: View {
     
 }
 
-struct TextImage_Previews: PreviewProvider {
-    static var rect = NSRect(x: 0, y: 0, width: 50, height: 50)
-    static var previews: some View {
-        TextImage(image: NSImage(imageLiteralResourceName: "screenshot").cgImage(forProposedRect: &rect, context: nil, hints: nil))
-    }
-}
+//struct TextImage_Previews: PreviewProvider {
+//    struct BindingTestHolder: View {
+//        @State var viewModel = ViewModel(networkManager: nil)
+//        @State var testItem = NSImage(imageLiteralResourceName: "screenshot")
+////            = ViewModel(networkManager: nil)
+////            = NSImage(imageLiteralResourceName: "screenshot")
+//        var body: some View {
+//            TextImage(viewModel: viewModel, image: testItem)
+////            (viewModel: $testItem, image: $testItem)
+//        }
+//    }
+//    static var previews: some View {
+//        BindingTestHolder()
+//    }
+//}

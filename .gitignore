@@ -9,3 +9,5 @@ Dependencies/
 .accio/
 
 Carthage/
+Shot.xcodeproj/xcuserdata
+Shot.xcodeproj/project.xcworkspace/xcuserdata

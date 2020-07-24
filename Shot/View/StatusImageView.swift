@@ -14,13 +14,17 @@ private var rect = NSRect(origin: .zero, size: CGSize(width: 40, height: 40)) {
     }
 }
 
-struct ContentView: View {
+struct StatusImageView: View {
     @Environment(\.managedObjectContext) var context
     
-    @State var image: CGImage? = NSImage(color: NSColor.white, size: NSSize(width: 40, height: 40)).cgImage(forProposedRect: &rect, context: nil, hints: nil)
+//    @State var image: CGImage? = NSImage(color: NSColor.white, size: NSSize(width: 40, height: 40)).cgImage(forProposedRect: &rect, context: nil, hints: nil)
+    
+    @State var viewModel: ViewModel
+    
     var body: some View {
-        TextImage(image: image)
-            .frame(minWidth: 10, idealWidth: 60, maxWidth: 700, minHeight: 10, idealHeight: 60, maxHeight: 700, alignment: .center)
+        TextImage()
+            .frame(minWidth: 10, idealWidth: 200, maxWidth: 700, minHeight: 10, idealHeight: 200, maxHeight: 700, alignment: .center)
+            .environmentObject(viewModel)
 //        VStack{
 //            Image(decorative: image, scale: 1)
 //            Button(action: {
@@ -40,9 +44,13 @@ struct ContentView: View {
     
 }
 
+extension CGImage: ObservableObject {
+    
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(image: ScreenshotMaker().doScreenshot()!)
+        StatusImageView(viewModel: ViewModel(networkManager: networkManager))
+//        image: ScreenshotMaker().doScreenshot()!
     }
 }
